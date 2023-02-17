@@ -21,9 +21,9 @@ To analyse the dataset `./data/FILENAME.dat` run the command
 
 `saa.exe FILENAME`
 
-In this case, the initial partition is a random partition. Alternatively, use the flag 
+In this case, the initial partition is a random partition. Alternatively, to load an initial partition, use
 
-`saa.exe FILENAME -l`
+`saa.exe FILENAME -l PNAME`
 
-to load an initial partition. This partition should be located in the `comms` folder and have the name `FILENAME_partition.dat`.
+This partition should be located in the `comms` folder and have the name `PNAME.dat`.
 
