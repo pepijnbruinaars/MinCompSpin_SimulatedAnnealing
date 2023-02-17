@@ -13,7 +13,7 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o 
 
 ## How to run
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as an additional argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. 
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as an additional argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings of the form `0101100101` where the variables are read from right to left. 
 
 ### Example:
 
