@@ -5,7 +5,7 @@ The code uses C++11 version.
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the `main` folder. This creates an `saa.exe` executable file. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.exe`.
+The code can be compiled using the `compile.bat` batch file in the `main` folder. This creates an `saa.exe` executable file. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
 
 ### Linux / macOS
 
@@ -17,15 +17,15 @@ The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on
 
 ### Example:
 
-In the `data` folder, there are some example datasets on 20 variables. The `comms` folder contains an example partition.
+The `data` folder contains an example dataset on 20 variables. The `comms` folder contains an example partition.
 
-To analyse the dataset `./data/HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00.dat` run the command (for Linux/Mac, replace .exe with .out)
+To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, replace .exe with .out)
 
-`saa.exe HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00`
+`saa.exe my_data`
 
 In this case, the initial partition is a random partition. Alternatively, to load an initial partition, use
 
-`saa.exe HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00 -l my_partition`
+`saa.exe my_data -l my_partition`
 
 This partition should be located in the `comms` folder and have the name `my_partition.dat`.
 
