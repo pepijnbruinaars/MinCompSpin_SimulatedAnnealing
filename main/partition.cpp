@@ -17,11 +17,11 @@ Partition parse_community(Partition &p_struct, uint64_t community, int i){
 
 }
 
-Partition load_partition(Partition &p_struct, string fname){
+Partition load_partition(Partition &p_struct, string pname){
 
 	p_struct.current_log_evidence = 0;
 
-	string fpath = "../comms/" + fname + "_mcm_communities.dat";
+	string fpath = "../comms/" + pname + ".dat";
 	string line;
 	ifstream comm_file(fpath);
 	uint64_t community;

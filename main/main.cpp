@@ -9,13 +9,30 @@ int main(int argc, char **argv) {
 	random_device randDevice;
     srand(randDevice());
 
+    string load;
+    string pname;
     string fname = argv[1];
+    if (argc == 4){
+    	load = argv[2];
+    	pname = argv[3];
+    } else {
+    	load = "";
+    	pname = "";
+    }
+
+
+   
 
     Partition p_struct;
 
     p_struct = get_data(fname, p_struct);
-    // p_struct = load_partition(p_struct, fname);
-    p_struct = random_partition(p_struct);
+    
+    if (load == "-l"){
+    	p_struct = load_partition(p_struct, pname);
+    } else {
+    	p_struct = random_partition(p_struct);
+    }
+    
 
     // SHOULD TEST IF INDEPENDENT INITIAL PARTITION DOESN'T GIVE ISSUES
 
