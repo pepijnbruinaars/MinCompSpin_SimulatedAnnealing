@@ -26,13 +26,18 @@ The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on
 
 The `data` folder contains an example dataset on 20 variables. The `comms` folder contains an example partition.
 
-To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, replace .exe with .out)
+To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, replace .exe with .out):
 
 `saa.exe my_data`
 
-In this case, the initial partition is a random partition. Optionally, to load an initial partition, use
+In this case, the initial partition is a random partition. Optionally, to load an initial partition, use:
 
 `saa.exe my_data -l my_partition`
 
 This partition should be located in the `comms` folder and have the name `my_partition.dat`.
+
+## Important details
+
+- In the current version, the number of variables `n` should be declared before compilation in `./data/header.h`.
+- The parameter `EPSILON` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to numerical inaccuracy. This can cause the algorithm to perform more iterations than strictly necessary.
 
