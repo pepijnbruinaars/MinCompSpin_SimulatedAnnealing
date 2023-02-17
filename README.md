@@ -11,9 +11,9 @@ The code can be compiled using the `compile.bat` batch file in the `main` folder
 
 The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.out`.
 
-## How to run
+## Running the code
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as an additional argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left.
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left.
 
 ### Example:
 
@@ -23,7 +23,7 @@ To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, repl
 
 `saa.exe my_data`
 
-In this case, the initial partition is a random partition. Alternatively, to load an initial partition, use
+In this case, the initial partition is a random partition. Optionally, to load an initial partition, use
 
 `saa.exe my_data -l my_partition`
 
