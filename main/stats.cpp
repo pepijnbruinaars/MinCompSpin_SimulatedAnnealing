@@ -28,10 +28,6 @@ map<uint64_t, unsigned int> build_pdata(map<uint64_t, unsigned int> &data, uint6
 
 double icc_evidence(uint64_t community, Partition &p_struct){
 
-	// if (p_struct.calculated_log_evidence.count(community) == 1){
-	// 	return p_struct.calculated_log_evidence.at(community);
-	// }
-
 	double logE = 0;
 	int k;
 
@@ -47,8 +43,6 @@ double icc_evidence(uint64_t community, Partition &p_struct){
 			k = it -> second;
 			logE += lgamma(k + 0.5) - lgamma(0.5);
 		}
-
-	// p_struct.calculated_log_evidence[community] = logE;
 
 	return logE;
 }
