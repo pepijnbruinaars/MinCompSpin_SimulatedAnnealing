@@ -6,7 +6,7 @@ The algorithms works by calculating the log-evidence $\log E$ for a given initia
 
 
 ## Requirements
-The code uses C++11 version.
+The code uses C++ version 11.
 
 ## Installation
 
