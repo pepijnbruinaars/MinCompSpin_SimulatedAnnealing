@@ -17,13 +17,15 @@ The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on
 
 ### Example:
 
-To analyse the dataset `./data/FILENAME.dat` run the command (for Linux/Mac, replace .exe with .out)
+In the `data` folder, there are some example datasets on 20 variables. The `comms` folder contains an example partition.
 
-`saa.exe FILENAME`
+To analyse the dataset `./data/HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00.dat` run the command (for Linux/Mac, replace .exe with .out)
+
+`saa.exe HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00`
 
 In this case, the initial partition is a random partition. Alternatively, to load an initial partition, use
 
-`saa.exe FILENAME -l PNAME`
+`saa.exe HG19_k6_mu0.00_(20,4,5)_B0.55_N1000_00 -l my_partition`
 
-This partition should be located in the `comms` folder and have the name `PNAME.dat`.
+This partition should be located in the `comms` folder and have the name `my_partition.dat`.
 
