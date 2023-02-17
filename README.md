@@ -1,3 +1,10 @@
+## Community detection using Minimally Complex Models: Simulated annealing algorithm
+
+This program allows to find community structures in binary data based on a class of spin models (maximum entropy models for binary data) called Minimally Complex Models (MCM). It is an alternative to another algorithm that can be found here: https://github.com/clelidm/MinCompSpin_Greedy. Details about MCMs can also be found there. 
+
+The algorithms works by calculating the log-evidence $\log E$ for a given initial partition $C_i$ (community structure). It then proposes slight changes to the partition and calculates the difference in log-evidence $\Delta \log E$. If the new partition $C_{i+1}$ has a larger log-evidence $\Delta \log E > 0$, the new partition is accepted. If not, the partition is still accepted with probability $P(C_{i+1}=C_i)\sim \exp(\Delta \log E/T_A)$ where $T_A$ is the annealing temperature. This parameter controls how likely the new partition is accepted. At large values, this prevents getting stuck in local optima. During the search the annealing temperature is gradually lowered allowing the algorithm to converge to an optimal solution. See https://en.wikipedia.org/wiki/Simulated_annealing for more details.
+
+
 ## Requirements
 The code uses C++11 version.
 
