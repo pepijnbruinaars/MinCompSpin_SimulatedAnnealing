@@ -17,7 +17,7 @@ The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on
 
 ### Example:
 
-To analyse the dataset `./data/FILENAME.dat` run the command
+To analyse the dataset `./data/FILENAME.dat` run the command (for Linux/Mac, replace .exe with .out)
 
 `saa.exe FILENAME`
 
