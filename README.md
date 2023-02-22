@@ -17,11 +17,11 @@ The code uses C++ version 11.
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the `src` folder. This creates an `saa.exe` executable file. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
+The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
 
 ### Linux / macOS
 
-The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.out`.
+The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.out`.
 
 ## Running the code
 
