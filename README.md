@@ -1,6 +1,6 @@
 ## Community detection using Minimally Complex Models: Simulated annealing algorithm
 
-This program allows to find community structures in binary data by using inference based on a class of spin models (maximum entropy models for binary data) called Minimally Complex Models (MCM). It is an alternative to another algorithm that can be found here: https://github.com/clelidm/MinCompSpin_Greedy. Details about MCMs can also be found there. 
+This program allows to find community structures in binary data of up to 128 variables by using inference based on a class of spin models (maximum entropy models for binary data) called Minimally Complex Models (MCM). It is an alternative to another algorithm that can be found here: https://github.com/clelidm/MinCompSpin_Greedy. Details about MCMs can also be found there. 
 
 The algorithm works by calculating the log-evidence $\log E$ for a given initial partition $C_i$ (community structure). It then proposes slight changes to the partition and calculates the difference in log-evidence $\Delta \log E$. If the new partition $C_{i+1}$ has a larger log-evidence $\Delta \log E > 0$, the new partition is accepted. If not, the partition is still accepted with probability $P(C_{i+1}=C_i)\sim \exp(\Delta \log E/T_A)$ where $T_A$ is the annealing temperature. This parameter controls how likely the new partition is accepted. At large values, this prevents getting stuck in local optima. During the search the annealing temperature is gradually lowered allowing the algorithm to converge to an optimal solution. See https://en.wikipedia.org/wiki/Simulated_annealing for more details.
 
@@ -25,11 +25,11 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o 
 
 ## Running the code
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. Currently the maximum number of variables is 64.
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
 ### Example:
 
-The `data` folder contains an example dataset on 20 variables. The `comms` folder contains an example partition.
+The `data` folder contains several example datasets on 20, 40, 60, 80 and 100 variables. The `comms` folder contains initial partitions for 20 and 100 variables.
 
 To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, replace .exe with .out):
 
