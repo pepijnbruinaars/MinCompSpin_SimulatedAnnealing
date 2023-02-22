@@ -43,6 +43,6 @@ This partition should be located in the `comms` folder and have the name `PARTIT
 
 ## Important details
 
-- In the current version, the number of variables `n` should be declared before compilation in `./data/header.h`.
-- The parameter `EPSILON` in `./data/header.h` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to tiny numerical differences. This can cause the algorithm to perform more iterations than strictly necessary.
+- In the current version, the number of variables `n` should be declared before compilation in `./main/header.h`.
+- The parameter `EPSILON` in `./main/header.h` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to tiny numerical differences. This can cause the algorithm to perform more iterations than strictly necessary.
 
