@@ -1,24 +1,29 @@
 #include "header.h"
 
-Partition get_data(string fname, Partition &p_struct){
+Partition get_data(string fname, Partition &p_struct) {
 
-	// PARSE DATAFILE 
+	// https://github.com/clelidm/MinCompSpin_Greedy
 
-	uint64_t state;
+	__int128_t state;
 	string fpath = "../data/" + fname + ".dat";
 	string line, subline;
 	ifstream myfile(fpath);
 
-	while (getline(myfile, line)){
+	while (getline(myfile, line)) {
+
 		subline = line.substr(0,n);
-		state = bitset<n>(subline).to_ulong();
-		p_struct.data[state] += 1;
-		p_struct.N += 1;
+		state = string_to_int(subline);
+		p_struct.data[state]++;
+		p_struct.N++;
+
 	}
 
 	myfile.close();
 
-	cout << p_struct.N << endl;
+	cout << "loaded: " << fpath << endl;
+	cout << p_struct.N << " samples." << endl;
 
 	return p_struct;
+
+
 }

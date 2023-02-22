@@ -1,41 +1,36 @@
 #include "header.h"
 
-bool DoubleSame(double a, double b){
-	return fabs(a-b) < EPSILON;
-}
+map<__int128_t, unsigned int> build_pdata(map<__int128_t, unsigned int> &data, __int128_t community) {
 
-map<uint64_t, unsigned int> build_pdata(map<uint64_t, unsigned int> &data, uint64_t community){
+	map<__int128_t, unsigned int> pdata;
+	map<__int128_t, unsigned int>::iterator it;
 
-	map<uint64_t, unsigned int> pdata;
-	map<uint64_t, unsigned int>::iterator it;
+	int ks;
+	__int128_t state, mask_state;
 
-	int ks; 
-	uint64_t state, mask_state;
-
-	for(it = data.begin(); it != data.end(); it++){
+	for (it = data.begin(); it != data.end(); it++) {
 
 		state = it -> first;
 		ks = it -> second;
 
 		mask_state = state & community;
 		pdata[mask_state] += ks;
-
 	}
 
 	return pdata;
-
 }
 
-double icc_evidence(uint64_t community, Partition &p_struct){
+double icc_evidence(__int128_t community, Partition &p_struct){
 
 	double logE = 0;
 	int k;
 
-	map<uint64_t, unsigned int> pdata = build_pdata(p_struct.data, community);
-	map<uint64_t, unsigned int>::iterator it;
+	map<__int128_t, unsigned int> pdata = build_pdata(p_struct.data, community);
+	map<__int128_t, unsigned int>::iterator it;
 
-	unsigned int rank = (bitset<n>(community).count());
-	double rank_pow = (1 << (rank - 1));
+	unsigned int rank = bit_count(community);
+	double rank_pow = (ONE << (rank - 1));
+
 	double pf = lgamma(rank_pow) - lgamma(p_struct.N + rank_pow);
 
 	logE += pf;
@@ -46,4 +41,3 @@ double icc_evidence(uint64_t community, Partition &p_struct){
 
 	return logE;
 }
-
