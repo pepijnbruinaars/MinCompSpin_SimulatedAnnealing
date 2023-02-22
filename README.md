@@ -27,7 +27,9 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp
 
 The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `src` folder with the filename of the dataset as a required argument. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
-### Example:
+- To see an example, run the `run.bat` batch file from the main folder (on Windows).
+
+### How to use:
 
 The `./input/data` folder contains several example datasets on 20, 40, 60, 80 and 100 variables. The `./input/comms` folder contains initial partitions for 20 and 100 variables.
 
