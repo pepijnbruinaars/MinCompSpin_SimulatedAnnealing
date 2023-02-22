@@ -65,6 +65,8 @@ Partition load_partition(Partition &p_struct, string pname) {
 		i++;
 	}
 
+	comm_file.close();
+
 	p_struct.best_log_evidence = p_struct.current_log_evidence;
 	p_struct.best_partition = p_struct.current_partition;
 	

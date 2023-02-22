@@ -102,14 +102,22 @@ int main(int argc, char **argv) {
 	chrono::duration<double> elapsed = end - start;
 	cout << "Iterations per second: " << static_cast <double> (iterations) / elapsed.count() << endl;
 
-	// print best partition
+	// print and save best partition
+	string cpath = "../output/comms/" + fname + "_comms.dat";
+	string spath = "../output/stats/" + fname + "_stats.dat";
+	ofstream comm_file(cpath);
+	ofstream stat_file(spath);
+	stat_file << "best log-evidence:" << p_struct.best_log_evidence << endl;
 	for(unsigned int i = 0; i < n; i++){
 		__int128_t community = p_struct.best_partition[i];
 		if (bit_count(community) > 0){
-			cout 
-			<< int_to_bitstring(community, n) << " " << bit_count(community) << endl;
+			cout << int_to_bitstring(community, n) << " " << bit_count(community) << endl;
+			comm_file << int_to_bitstring(community, n) << endl;
 		}
-	}    
+	}   
+
+	comm_file.close(); 
+	stat_file.close(); 
 
     return 0;
 
