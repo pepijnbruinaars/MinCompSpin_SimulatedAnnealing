@@ -54,7 +54,7 @@ Partition load_partition(Partition &p_struct, string pname) {
 
 	p_struct.current_log_evidence = 0;
 
-	string fpath = "../comms/" + pname + ".dat";
+	string fpath = "../input/comms/" + pname + ".dat";
 	string line;
 	ifstream comm_file(fpath);
 	__int128_t community;
