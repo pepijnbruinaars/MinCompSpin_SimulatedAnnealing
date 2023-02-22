@@ -25,13 +25,13 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o 
 
 ## Running the code
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
 ### Example:
 
-The `data` folder contains several example datasets on 20, 40, 60, 80 and 100 variables. The `comms` folder contains initial partitions for 20 and 100 variables.
+The `./input/data` folder contains several example datasets on 20, 40, 60, 80 and 100 variables. The `./input/comms` folder contains initial partitions for 20 and 100 variables.
 
-To analyse the dataset `./data/DATAFILE_NAME.dat` run the command (for Linux/Mac, replace .exe with .out):
+To analyse the dataset `./input/data/DATAFILE_NAME.dat` run the command (for Linux/Mac, replace .exe with .out):
 
 `saa.exe DATAFILE_NAME`
 
@@ -39,7 +39,7 @@ In this case, the initial partition is a random partition. Optionally, to load a
 
 `saa.exe DATAFILE_NAME -l PARTITION_NAME`
 
-This partition should be located in the `comms` folder and have the name `PARTITION_NAME.dat`.
+This partition should be located in the `./input/comms` folder and have the name `PARTITION_NAME.dat`.
 
 ## Important details
 
