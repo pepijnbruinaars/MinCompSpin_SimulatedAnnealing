@@ -31,15 +31,15 @@ The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on
 
 The `data` folder contains several example datasets on 20, 40, 60, 80 and 100 variables. The `comms` folder contains initial partitions for 20 and 100 variables.
 
-To analyse the dataset `./data/my_data.dat` run the command (for Linux/Mac, replace .exe with .out):
+To analyse the dataset `./data/DATAFILE_NAME.dat` run the command (for Linux/Mac, replace .exe with .out):
 
-`saa.exe my_data`
+`saa.exe DATAFILE_NAME`
 
 In this case, the initial partition is a random partition. Optionally, to load an initial partition, use:
 
-`saa.exe my_data -l my_partition`
+`saa.exe DATAFILE_NAME -l PARTITION_NAME`
 
-This partition should be located in the `comms` folder and have the name `my_partition.dat`.
+This partition should be located in the `comms` folder and have the name `PARTITION_NAME.dat`.
 
 ## Important details
 
