@@ -17,7 +17,7 @@ The code uses C++ version 11.
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the `main` folder. This creates an `saa.exe` executable file. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
+The code can be compiled using the `compile.bat` batch file in the `src` folder. This creates an `saa.exe` executable file. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
 
 ### Linux / macOS
 
@@ -25,7 +25,7 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./*.cpp -o 
 
 ## Running the code
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `main` folder with the filename of the dataset as a required argument. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `src` folder with the filename of the dataset as a required argument. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
 ### Example:
 
@@ -41,8 +41,31 @@ In this case, the initial partition is a random partition. Optionally, to load a
 
 This partition should be located in the `./input/comms` folder and have the name `PARTITION_NAME.dat`.
 
-## Important details
+## Output 
 
-- In the current version, the number of variables `n` should be declared before compilation in `./main/header.h`.
-- The parameter `EPSILON` in `./main/header.h` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to tiny numerical differences. This can cause the algorithm to perform more iterations than strictly necessary.
+The best partition found is written to `./output/comms/DATAFILE_NAME_comms.dat`. The associated best log-evidence is written to `./output/stats/DATAFILE_NAME_stats.dat`. 
+
+### Example: 
+
+If the best partition found divides 20 variables in the following way: `[[0,1,2],[3,4,5],[6,7,8],[9,10],[11,12,13,14],[15,16,17,18,19]]` the output file in the `./output/comms` directory would like this:
+
+```
+00000000000000000111
+00000000000000111000
+00000000000111000000
+00000000011000000000
+00000111100000000000
+11111000000000000000
+```
+
+## Important parameters
+
+- In the current version, the number of variables `n` should be declared before compilation in `./src/header.h`.
+- The parameter `EPSILON` in `./src/header.h` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to tiny numerical differences. This can cause the algorithm to perform more iterations than strictly necessary.
+- There are four parameters that control the simulated annealing procedure in `./src/main.cpp`. The current settings perform well as a good starting point that balances performance and optimality of the found partition. 
+  - `T0`: the initial annealing temperature.
+  - `update_schedule`: the number of iterations the algorithms performs at the same annealing temperature.
+  - `max_no_improve`: the maximum number of iterations without improvement in log-evidence before stopping the algorithm - increasing this allows for a more exhaustive search at the cost of speed and can be useful when analyzing data of many variables.
+  - `max_iterations`: the maximum total number of iterations to perform.
+  
 
