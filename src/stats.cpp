@@ -29,7 +29,7 @@ double icc_evidence(__int128_t community, Partition &p_struct){
 	map<__int128_t, unsigned int>::iterator it;
 
 	unsigned int rank = bit_count(community);
-	double rank_pow = (ONE << (rank - 1));
+	double rank_pow = (double) (ONE << (rank - 1));
 
 	double pf = lgamma(rank_pow) - lgamma(p_struct.N + rank_pow);
 
