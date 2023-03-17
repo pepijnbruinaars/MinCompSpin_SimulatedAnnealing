@@ -1,6 +1,6 @@
 #include "header.h"
 
-Partition parse_community(Partition &p_struct, __int128_t community, int i){
+Partition parse_community(Partition &p_struct, __uint128_t community, int i){
 
 	p_struct.current_partition[i] = community;
 	p_struct.partition_evidence[i] = icc_evidence(community, p_struct);
@@ -17,8 +17,8 @@ Partition parse_community(Partition &p_struct, __int128_t community, int i){
 
 Partition random_partition(Partition &p_struct) {
 
-	__int128_t community;
-	__int128_t assigned = 0;
+	__uint128_t community;
+	__uint128_t assigned = 0;
 
 	int i = 0;
 
@@ -57,7 +57,7 @@ Partition load_partition(Partition &p_struct, string pname) {
 	string fpath = "../input/comms/" + pname + ".dat";
 	string line;
 	ifstream comm_file(fpath);
-	__int128_t community;
+	__uint128_t community;
 	int i = 0;
 	while(getline(comm_file, line)){
 		community = string_to_int(line);

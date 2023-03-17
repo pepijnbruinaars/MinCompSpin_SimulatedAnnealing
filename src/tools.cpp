@@ -5,7 +5,7 @@ bool DoubleSame(double a, double b){
 	return fabs(a-b) < EPSILON;
 }
 
-string int_to_bitstring(__int128_t number, unsigned int r) {
+string int_to_bitstring(__uint128_t number, unsigned int r) {
 
 	// https://leetcode.com/problems/add-binary/solutions/143963/c-2ms-solution-using-128-bit-integers/
 
@@ -24,11 +24,11 @@ string int_to_bitstring(__int128_t number, unsigned int r) {
 
 }
 
-__int128_t random_128_int(unsigned int k){
+__uint128_t random_128_int(unsigned int k){
 
 	// generate random 128-bit number less then 2^k
 
-	__int128_t number = 0;
+	__uint128_t number = 0;
 
 	number += rand() % 2;
 
@@ -41,9 +41,9 @@ __int128_t random_128_int(unsigned int k){
 }
 
 
-__int128_t string_to_int(string nstring) {
+__uint128_t string_to_int(string nstring) {
 
-	__int128_t state, op;
+	__uint128_t state, op;
 	char c = '1';
 
 	op = ONE << (n - 1);
@@ -57,7 +57,7 @@ __int128_t string_to_int(string nstring) {
 	return state;
 }
 
-unsigned int bit_count(__int128_t number) {
+unsigned int bit_count(__uint128_t number) {
 
 	unsigned int count;
 

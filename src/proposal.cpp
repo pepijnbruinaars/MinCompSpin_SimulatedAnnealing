@@ -12,7 +12,7 @@ Partition merge_partition(Partition &p_struct){
 	}
 
 	// calculate log-evidence of merged community
-	__int128_t merged_community = p_struct.current_partition[p1] + p_struct.current_partition[p2];
+	__uint128_t merged_community = p_struct.current_partition[p1] + p_struct.current_partition[p2];
 	double merged_evidence = icc_evidence(merged_community, p_struct);
 	double delta_log_evidence = merged_evidence - p_struct.partition_evidence[p1] - p_struct.partition_evidence[p2];
 	
@@ -55,11 +55,11 @@ Partition split_partition(Partition &p_struct){
 
 	// choose random valid community
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
-	__int128_t community = p_struct.current_partition[p1];
+	__uint128_t community = p_struct.current_partition[p1];
 
-	__int128_t mask = random_128_int(n);
-	__int128_t c1 = (community & mask);
-	__int128_t c2 = (community & (~mask));
+	__uint128_t mask = random_128_int(n);
+	__uint128_t c1 = (community & mask);
+	__uint128_t c2 = (community & (~mask));
 
 	// masking shouldn't assign all nodes to one community
 	while ((bit_count(c1) == 0) || (bit_count(c2) == 0)){
@@ -114,7 +114,7 @@ Partition switch_partition(Partition &p_struct){
 	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // don't create empty partitions
 
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
-	__int128_t c1 = p_struct.current_partition[p1];
+	__uint128_t c1 = p_struct.current_partition[p1];
 	unsigned int node = randomBitIndex(c1);
 
 	unsigned int p2 = p1;
@@ -122,9 +122,9 @@ Partition switch_partition(Partition &p_struct){
 		p2 = randomBitIndex(p_struct.occupied_partitions);
 	}
 	
-	__int128_t c2 = p_struct.current_partition[p2];
-	__int128_t new_c1 = c1 - (ONE << node); // remove from community 1
-	__int128_t new_c2 = c2 + (ONE << node); // add to community 2
+	__uint128_t c2 = p_struct.current_partition[p2];
+	__uint128_t new_c1 = c1 - (ONE << node); // remove from community 1
+	__uint128_t new_c2 = c2 + (ONE << node); // add to community 2
 
 	double log_evidence_1 = icc_evidence(new_c1, p_struct);
 	double log_evidence_2 = icc_evidence(new_c2, p_struct);

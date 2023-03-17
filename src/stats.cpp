@@ -1,12 +1,12 @@
 #include "header.h"
 
-map<__int128_t, unsigned int> build_pdata(map<__int128_t, unsigned int> &data, __int128_t community) {
+map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data, __uint128_t community) {
 
-	map<__int128_t, unsigned int> pdata;
-	map<__int128_t, unsigned int>::iterator it;
+	map<__uint128_t, unsigned int> pdata;
+	map<__uint128_t, unsigned int>::iterator it;
 
 	int ks;
-	__int128_t state, mask_state;
+	__uint128_t state, mask_state;
 
 	for (it = data.begin(); it != data.end(); it++) {
 
@@ -20,13 +20,13 @@ map<__int128_t, unsigned int> build_pdata(map<__int128_t, unsigned int> &data, _
 	return pdata;
 }
 
-double icc_evidence(__int128_t community, Partition &p_struct){
+double icc_evidence(__uint128_t community, Partition &p_struct){
 
 	double logE = 0;
 	int k;
 
-	map<__int128_t, unsigned int> pdata = build_pdata(p_struct.data, community);
-	map<__int128_t, unsigned int>::iterator it;
+	map<__uint128_t, unsigned int> pdata = build_pdata(p_struct.data, community);
+	map<__uint128_t, unsigned int>::iterator it;
 
 	unsigned int rank = bit_count(community);
 	double rank_pow = (double) (ONE << (rank - 1));

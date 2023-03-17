@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 	ofstream stat_file(spath);
 	stat_file << "best log-evidence:" << p_struct.best_log_evidence << endl;
 	for(unsigned int i = 0; i < n; i++){
-		__int128_t community = p_struct.best_partition[i];
+		__uint128_t community = p_struct.best_partition[i];
 		if (bit_count(community) > 0){
 			cout << int_to_bitstring(community, n) << " " << bit_count(community) << endl;
 			comm_file << int_to_bitstring(community, n) << endl;

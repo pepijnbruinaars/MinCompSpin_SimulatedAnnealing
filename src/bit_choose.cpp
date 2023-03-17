@@ -1,7 +1,7 @@
 #include "header.h"
 
 
-unsigned int randomBitIndex(__int128_t number) {
+unsigned int randomBitIndex(__uint128_t number) {
 
 	string r;
 
