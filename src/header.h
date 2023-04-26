@@ -10,11 +10,14 @@
 
 using namespace std;
 
-const unsigned int n = 100;
 const __uint128_t ONE = 1; // 128-bit representation of 1
 const double EPSILON = 1e-4; // minimum change in log-evidence 
 
 struct Partition {
+
+	Partition(const unsigned int &n_) : n(n_) {}
+
+	unsigned int n; // number of variables
 
 	double T; // annealing temperature
 	double current_log_evidence = 0;
@@ -39,7 +42,7 @@ bool DoubleSame(double a, double b);
 unsigned int bit_count(__uint128_t number);
 unsigned int randomBitIndex(__uint128_t number);
 string int_to_bitstring(__uint128_t number, unsigned int r);
-__uint128_t string_to_int(string nstring);
+__uint128_t string_to_int(string nstring, unsigned int n);
 __uint128_t random_128_int(unsigned int k);
 
 // evidence calculation

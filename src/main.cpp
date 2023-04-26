@@ -12,20 +12,25 @@ int main(int argc, char **argv) {
     srand(randDevice());
 
     // runtime arguments
+    unsigned int n;
+    sscanf(argv[1], "%d", &n);
+
+    cout << n << " variables" << endl;
+
     string load_flag;
     string pname; 
-    string fname = argv[1];
+    string fname = argv[2];
 
-    if (argc == 4){
-    	load_flag = argv[2];
-    	pname = argv[3];
+    if (argc == 5){
+    	load_flag = argv[3];
+    	pname = argv[4];
     } else {
     	load_flag = "";
     	pname = "";
     }
 
     // initialize partition and load data
-    Partition p_struct;
+    Partition p_struct(n);
     p_struct = get_data(fname, p_struct);
     if (load_flag == "-l") {
     	p_struct = load_partition(p_struct, pname);

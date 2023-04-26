@@ -50,20 +50,20 @@ Partition merge_partition(Partition &p_struct){
 
 Partition split_partition(Partition &p_struct){
 
-	if (p_struct.nc == n){return p_struct;} // can't split independent communities
+	if (p_struct.nc == p_struct.n){return p_struct;} // can't split independent communities
 	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // can't split communities of size 1
 
 	// choose random valid community
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
 	__uint128_t community = p_struct.current_partition[p1];
 
-	__uint128_t mask = random_128_int(n);
+	__uint128_t mask = random_128_int(p_struct.n);
 	__uint128_t c1 = (community & mask);
 	__uint128_t c2 = (community & (~mask));
 
 	// masking shouldn't assign all nodes to one community
 	while ((bit_count(c1) == 0) || (bit_count(c2) == 0)){
-		mask = random_128_int(n);
+		mask = random_128_int(p_struct.n);
 		c1 = (community & mask);
 		c2 = (community & (~mask));
 
@@ -80,7 +80,7 @@ Partition split_partition(Partition &p_struct){
 		// find empty spot for second split community
 		unsigned int p2 = randomBitIndex(~p_struct.occupied_partitions);
 		// find spot at index < n
-		while (p2 >= n){
+		while (p2 >= p_struct.n){
 			p2 = randomBitIndex(~p_struct.occupied_partitions);
 		}
 
@@ -110,7 +110,7 @@ Partition split_partition(Partition &p_struct){
 Partition switch_partition(Partition &p_struct){
 
 	if (p_struct.nc <= 1){return p_struct;} // can't switch node to same community 
-	if (p_struct.nc == n){return p_struct;} // switching independent nodes doesn't change anything
+	if (p_struct.nc == p_struct.n){return p_struct;} // switching independent nodes doesn't change anything
 	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // don't create empty partitions
 
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);

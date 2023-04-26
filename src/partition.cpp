@@ -22,9 +22,9 @@ Partition random_partition(Partition &p_struct) {
 
 	int i = 0;
 
-	while(bit_count(assigned) < n) {
+	while(bit_count(assigned) < p_struct.n) {
 
-		community = random_128_int(n);
+		community = random_128_int(p_struct.n);
 		community = community - (assigned & community);
 		assigned += community;
 
@@ -32,9 +32,9 @@ Partition random_partition(Partition &p_struct) {
 
 			p_struct = parse_community(p_struct, community, i);
 
-			cout << "New community: " << int_to_bitstring(community, n) << endl;
+			cout << "New community: " << int_to_bitstring(community, p_struct.n) << endl;
 			cout << "Log-evidence: " << p_struct.partition_evidence[i] << endl;
-			cout << "Assigned nodes: " << int_to_bitstring(assigned, n) << endl;
+			cout << "Assigned nodes: " << int_to_bitstring(assigned, p_struct.n) << endl;
 			cout << endl;
 			i++;
 		}
@@ -60,7 +60,7 @@ Partition load_partition(Partition &p_struct, string pname) {
 	__uint128_t community;
 	int i = 0;
 	while(getline(comm_file, line)){
-		community = string_to_int(line);
+		community = string_to_int(line, p_struct.n);
 		p_struct = parse_community(p_struct, community, i);
 		i++;
 	}
