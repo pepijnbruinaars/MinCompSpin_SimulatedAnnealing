@@ -38,10 +38,6 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
 		pf = lgamma(rank_pow) - lgamma(p_struct.N + rank_pow);
 	}
 
-	
-
-	//double pf = lgamma(rank_pow) - lgamma(p_struct.N + rank_pow);
-
 	logE += pf;
 	for (it = pdata.begin(); it != pdata.end(); it ++){
 			k = it -> second;
