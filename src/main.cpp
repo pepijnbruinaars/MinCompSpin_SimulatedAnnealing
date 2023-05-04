@@ -11,32 +11,55 @@ int main(int argc, char **argv) {
 	random_device randDevice;
     srand(randDevice());
 
+    bool pload = false; // load partition
+    string fname, pname;
+    unsigned int max_iterations = 50000;
+    unsigned int max_no_improve = 10000;
+
     // runtime arguments
     unsigned int n;
     sscanf(argv[1], "%d", &n);
 
-    cout << n << " variables" << endl;
+    for (int i = 2; i < argc; i++) {
 
-    string load_flag;
-    string pname; 
-    string fname = argv[2];
+    	string arg = argv[i];
 
-    if (argc == 5){
-    	load_flag = argv[3];
-    	pname = argv[4];
-    } else {
-    	load_flag = "";
-    	pname = "";
+    	if (arg == "-i") {
+    		fname = argv[i+1];
+    		i++;
+    		cout << "input file: " << fname << endl;
+    	}
+
+    	if (arg == "-p") {
+    		pname = argv[i+1];
+    		pload = true;
+    		i++;
+    		cout << "input partition: " << fname << endl;
+    	}
+
+    	if (arg == "--max") {
+    		max_iterations = stoi(argv[i+1]);
+    		i++;
+    	}
+
+    	if (arg == "--stop") {
+    		max_no_improve = stoi(argv[i+1]);
+    		i++;
+    	}
     }
+
+    cout << "max iterations (stop): " << max_iterations << " (" << max_no_improve << ")" << endl;
 
     // initialize partition and load data
     Partition p_struct(n);
     p_struct = get_data(fname, p_struct);
-    if (load_flag == "-l") {
+
+    if (pload) {
     	p_struct = load_partition(p_struct, pname);
     } else {
     	p_struct = random_partition(p_struct);
     }
+
     
 
     unsigned int f;
@@ -47,8 +70,8 @@ int main(int argc, char **argv) {
     double T0 = 100; // initial annealing temperature
     p_struct.T = T0;
     unsigned int update_schedule = 100; // number of iterations at same annealing temperature
-	unsigned int max_no_improve = 10000; // max. iterations without improvement in log-evidence
-	unsigned int max_iterations = 50000; // max. total iterations
+	// unsigned int max_no_improve = 10000; // max. iterations without improvement in log-evidence
+	// unsigned int max_iterations = 50000; // max. total iterations
 
 	// performance
     auto start = chrono::system_clock::now();
