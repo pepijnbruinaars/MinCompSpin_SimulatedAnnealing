@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
     		pname = argv[i+1];
     		pload = true;
     		i++;
-    		cout << "input partition: " << fname << endl;
+    		cout << "input partition: " << pname << endl;
     	}
 
     	if (arg == "--max") {
