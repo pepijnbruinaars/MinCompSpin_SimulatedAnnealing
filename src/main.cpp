@@ -6,6 +6,7 @@
 
 int main(int argc, char **argv) {
 
+	cout << "SIMULATED ANNEALING [STAND-ALONE VERSION, UNUSED_BITS]" << endl;
 
 	// initialize RNG
 	random_device randDevice;
@@ -60,8 +61,6 @@ int main(int argc, char **argv) {
     	p_struct = random_partition(p_struct);
     }
 
-    
-
     unsigned int f;
     unsigned int iterations = 0;
     unsigned int steps_since_improve = 0;
@@ -70,8 +69,6 @@ int main(int argc, char **argv) {
     double T0 = 100; // initial annealing temperature
     p_struct.T = T0;
     unsigned int update_schedule = 100; // number of iterations at same annealing temperature
-	// unsigned int max_no_improve = 10000; // max. iterations without improvement in log-evidence
-	// unsigned int max_iterations = 50000; // max. total iterations
 
 	// performance
     auto start = chrono::system_clock::now();

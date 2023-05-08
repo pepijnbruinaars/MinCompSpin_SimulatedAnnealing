@@ -5,7 +5,7 @@ map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data,
 	map<__uint128_t, unsigned int> pdata;
 	map<__uint128_t, unsigned int>::iterator it;
 
-	int ks;
+	unsigned int ks;
 	__uint128_t state, mask_state;
 
 	for (it = data.begin(); it != data.end(); it++) {
@@ -24,17 +24,18 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
 
 	double logE = 0;
 	double pf;
-	int k;
+	unsigned int k;
 
 	map<__uint128_t, unsigned int> pdata = build_pdata(p_struct.data, community);
 	map<__uint128_t, unsigned int>::iterator it;
 
 	unsigned int rank = bit_count(community);
-	double rank_pow = (double) (ONE << (rank - 1));
+	
 
 	if (rank > 32) {
 		pf = -((double) rank - 1.) * p_struct.N * log(2);
 	} else {
+		double rank_pow = (double) (ONE << (rank - 1));
 		pf = lgamma(rank_pow) - lgamma(p_struct.N + rank_pow);
 	}
 

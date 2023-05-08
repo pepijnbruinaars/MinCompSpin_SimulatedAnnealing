@@ -6,10 +6,7 @@ Partition merge_partition(Partition &p_struct){
 
 	// choose two valid random communities
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions);
-	unsigned int p2 = p1;
-	while (p1 == p2){
-		p2 = randomBitIndex(p_struct.occupied_partitions);
-	}
+	unsigned int p2 = randomBitIndex(p_struct.occupied_partitions - (ONE << p1));
 
 	// calculate log-evidence of merged community
 	__uint128_t merged_community = p_struct.current_partition[p1] + p_struct.current_partition[p2];
@@ -20,11 +17,6 @@ Partition merge_partition(Partition &p_struct){
 	double p = exp(delta_log_evidence/p_struct.T);
 	double u = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
 
-
-	// cout << int_to_bitstring(p_struct.current_partition[p1], n) << endl;
-	// cout << int_to_bitstring(p_struct.current_partition[p2], n) << endl;
-	// cout << int_to_bitstring(merged_community, n) << endl;
-	
 	if (p > u){
 		p_struct.current_partition[p1] = merged_community;
 		p_struct.current_partition[p2] = 0;
@@ -66,7 +58,6 @@ Partition split_partition(Partition &p_struct){
 		mask = random_128_int(p_struct.n);
 		c1 = (community & mask);
 		c2 = (community & (~mask));
-
 	}
 
 	double log_evidence_1 = icc_evidence(c1, p_struct);
@@ -79,11 +70,6 @@ Partition split_partition(Partition &p_struct){
 	if (p > u){
 		// find empty spot for second split community
 		unsigned int p2 = randomBitIndex(~p_struct.occupied_partitions - p_struct.unused_bits);
-		// find spot at index < n (this is probably redundant due to unused bits)
-		while (p2 >= p_struct.n){
-			p2 = randomBitIndex(~p_struct.occupied_partitions - p_struct.unused_bits);
-		}
-
 
 		p_struct.current_partition[p1] = c1;
 		p_struct.partition_evidence[p1] = log_evidence_1;
@@ -92,8 +78,6 @@ Partition split_partition(Partition &p_struct){
 		p_struct.occupied_partitions += (ONE << p2);
 		p_struct.current_log_evidence += delta_log_evidence;
 		p_struct.nc += 1;
-
-		// cout << int_to_bitstring(p_struct.occupied_partitions, n) << endl;
 
 		if (bit_count(c1) <= 1){
 			p_struct.occupied_partitions_gt2_nodes -= (ONE << p1);
@@ -114,13 +98,9 @@ Partition switch_partition(Partition &p_struct){
 	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // don't create empty partitions
 
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
+	unsigned int p2 = randomBitIndex(p_struct.occupied_partitions - (ONE << p1));
 	__uint128_t c1 = p_struct.current_partition[p1];
 	unsigned int node = randomBitIndex(c1);
-
-	unsigned int p2 = p1;
-	while (p1 == p2){
-		p2 = randomBitIndex(p_struct.occupied_partitions);
-	}
 	
 	__uint128_t c2 = p_struct.current_partition[p2];
 	__uint128_t new_c1 = c1 - (ONE << node); // remove from community 1
