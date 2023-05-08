@@ -11,6 +11,8 @@
 using namespace std;
 
 const __uint128_t ONE = 1; // 128-bit representation of 1
+const __uint128_t ZERO = 0;
+const __uint128_t NOT_ZERO = ~0; // 128-bit integer containing only ones
 const double EPSILON = 1e-4; // minimum change in log-evidence 
 
 struct Partition {
@@ -18,6 +20,7 @@ struct Partition {
 	Partition(const unsigned int &n_) : n(n_) {}
 
 	unsigned int n; // number of variables
+	__uint128_t unused_bits = NOT_ZERO - ((ONE << n) - 1); // ones in the unused bits - used for fast location of empty partitions
 
 	double T; // annealing temperature
 	double current_log_evidence = 0;

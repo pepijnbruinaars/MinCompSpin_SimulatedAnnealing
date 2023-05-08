@@ -78,10 +78,10 @@ Partition split_partition(Partition &p_struct){
 
 	if (p > u){
 		// find empty spot for second split community
-		unsigned int p2 = randomBitIndex(~p_struct.occupied_partitions);
-		// find spot at index < n
+		unsigned int p2 = randomBitIndex(~p_struct.occupied_partitions - p_struct.unused_bits);
+		// find spot at index < n (this is probably redundant due to unused bits)
 		while (p2 >= p_struct.n){
-			p2 = randomBitIndex(~p_struct.occupied_partitions);
+			p2 = randomBitIndex(~p_struct.occupied_partitions - p_struct.unused_bits);
 		}
 
 
