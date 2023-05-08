@@ -20,7 +20,7 @@ The code uses C++ version 11.
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis.
+The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis. This file also shows the use of the optional flags `--max` and `--stop`.
 
 ### Linux / macOS
 
@@ -28,7 +28,7 @@ The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp
 
 ## Running the code
 
-The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `src` folder with the filename of the dataset as a required argument. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
+The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `bin` folder. The program should be called with the number of variables `n` and the filename of the dataset as required arguments. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
 - To see an example, run the `run.bat` batch file from the main folder (on Windows).
 
@@ -38,13 +38,17 @@ The `./input/data` folder contains several example datasets on 20, 40, 60, 80 an
 
 To analyse the dataset `./input/data/DATAFILE_NAME.dat` run the command (for Linux/Mac, replace .exe with .out):
 
-`saa.exe DATAFILE_NAME`
+`saa.exe n -i DATAFILE_NAME`
+
+where `n` is the number of variables and the flag `-i` should be followed by the name of the dataset (without the `.dat` extension).
 
 In this case, the initial partition is a random partition. Optionally, to load an initial partition, use:
 
-`saa.exe DATAFILE_NAME -l PARTITION_NAME`
+`saa.exe n -i DATAFILE_NAME -p PARTITION_NAME`
 
-This partition should be located in the `./input/comms` folder and have the name `PARTITION_NAME.dat`.
+This partition should be located in the `./input/comms` folder and have the name `PARTITION_NAME.dat`. By default, the program runs for 50k iterations and stops early if there has been no improvement in the log-evidence for 10k iterations. These parameters can be changed by using the `--max` and `--stop` flags. For example, to perform a maximum of 4500 iterations and stop early after 2250 "unsuccessful" iterations, use:
+
+`saa.exe n -i DATAFILE_NAME --max 4500 --stop 2250`
 
 ## Output 
 
@@ -65,12 +69,15 @@ If the best partition found divides 20 variables in the following way: `[[0,1,2]
 
 ## Important parameters
 
-- In the current version, the number of variables `n` should be declared before compilation in `./src/header.h`.
 - The parameter `EPSILON` in `./src/header.h` controls the minimum difference in log-evidence the best partition should have from the previous best in ordered to be considered the new best. Setting this to 0 can result in partitions that are equivalent up to permutation to be considered better due to tiny numerical differences. This can cause the algorithm to perform more iterations than strictly necessary.
 - There are four parameters that control the simulated annealing procedure in `./src/main.cpp`. The current settings perform well as a good starting point that balances performance and optimality of the found partition. 
   - `T0`: the initial annealing temperature.
   - `update_schedule`: the number of iterations the algorithms performs at the same annealing temperature.
   - `max_no_improve`: the maximum number of iterations without improvement in log-evidence before stopping the algorithm - increasing this allows for a more exhaustive search at the cost of speed and can be useful when analyzing data of many variables.
   - `max_iterations`: the maximum total number of iterations to perform.
+
+## Coming soon
+- Python wrapper
+- Jupyter tutorial notebook
   
 
