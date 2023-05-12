@@ -54,6 +54,7 @@ double icc_evidence(__uint128_t community, Partition &p_struct);
 
 // partitions and data
 Partition get_data(string fname, Partition &p_struct);
+Partition independent_partition(Partition &p_struct);
 Partition random_partition(Partition &p_struct);
 Partition load_partition(Partition &p_struct, string pname);
 Partition parse_community(Partition &p_struct, __uint128_t community, int i);

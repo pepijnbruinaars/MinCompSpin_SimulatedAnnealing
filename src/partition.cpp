@@ -49,6 +49,26 @@ Partition random_partition(Partition &p_struct) {
 	return p_struct;
 }
 
+Partition independent_partition(Partition &p_struct) {
+
+	__uint128_t community;
+
+	for (unsigned int i = 0; i < p_struct.n; i++) {
+
+		community = (ONE << i);
+		p_struct = parse_community(p_struct, community, i);
+
+		cout << "New community: " << int_to_bitstring(community, p_struct.n) << endl;
+
+	}
+
+	p_struct.best_log_evidence = p_struct.current_log_evidence;
+	p_struct.best_partition = p_struct.current_partition;
+
+	cout << "Initial log-evidence: " << p_struct.current_log_evidence << endl;
+
+	return p_struct;
+}
 
 Partition load_partition(Partition &p_struct, string pname) {
 

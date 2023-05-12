@@ -58,7 +58,8 @@ int main(int argc, char **argv) {
     if (pload) {
     	p_struct = load_partition(p_struct, pname);
     } else {
-    	p_struct = random_partition(p_struct);
+    	// p_struct = random_partition(p_struct);
+    	p_struct = independent_partition(p_struct);
     }
 
     unsigned int f;

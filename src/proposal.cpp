@@ -33,6 +33,8 @@ Partition merge_partition(Partition &p_struct){
 		if ((p_struct.occupied_partitions_gt2_nodes & (ONE << p1)) == 0){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p1);
 		}	
+
+
 	}
 
 	return p_struct;
@@ -85,6 +87,8 @@ Partition split_partition(Partition &p_struct){
 		if (bit_count(c2) >= 2){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p2);
 		}		
+
+
 	}
 
 	return p_struct;
@@ -125,6 +129,7 @@ Partition switch_partition(Partition &p_struct){
 		if ((bit_count(c2) <= 1) && (bit_count(new_c2) >= 2)){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p2);
 		} 
+
 	}
 
 	return p_struct;
