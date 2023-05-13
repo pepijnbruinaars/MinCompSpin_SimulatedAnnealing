@@ -8,6 +8,8 @@ Partition simulated_annealing(Partition &p_struct,
 	unsigned int max_iterations, 
 	unsigned int max_no_improve) {
 
+	cout << "\n- running simulated annealing algorithm\n" << endl; 
+
 	unsigned int f;
     unsigned int iterations = 0;
     unsigned int steps_since_improve = 0;

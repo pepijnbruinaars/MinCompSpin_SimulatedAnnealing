@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
     // ==== declarations ======
     bool pload = false; // load partition
     bool rload = false;
+    bool greedy = false;
     string fname, pname;
     // ========================
 
@@ -52,6 +53,10 @@ int main(int argc, char **argv) {
     		rload = true;
     	}
 
+    	if (arg == "-g") {
+    		greedy = true;
+    	}
+
     	// maximum iterations
     	if (arg == "--max") {
     		max_iterations = stoi(argv[i+1]);
@@ -82,6 +87,10 @@ int main(int argc, char **argv) {
     	p_struct = independent_partition(p_struct);
     }
 
+    if (greedy) {
+    	p_struct = greedy_merging(p_struct);
+    }
+    
     // main algorithm 
     p_struct = simulated_annealing(p_struct, max_iterations, max_no_improve);
 
