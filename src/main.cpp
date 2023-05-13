@@ -1,8 +1,4 @@
 #include "header.h"
-#include <time.h>
-#include <ctime> 
-#include <ratio>
-#include <chrono>
 
 int main(int argc, char **argv) {
 
@@ -62,71 +58,10 @@ int main(int argc, char **argv) {
     	p_struct = independent_partition(p_struct);
     }
 
-    unsigned int f;
-    unsigned int iterations = 0;
-    unsigned int steps_since_improve = 0;
+    // main algorithm 
+    p_struct = simulated_annealing(p_struct, max_iterations, max_no_improve);
 
-    // annealing parameters
-    double T0 = 100; // initial annealing temperature
-    p_struct.T = T0;
-    unsigned int update_schedule = 100; // number of iterations at same annealing temperature
 
-	// performance
-    auto start = chrono::system_clock::now();
-
-    for (unsigned int i = 0; i < max_iterations; i++){
-
-    	iterations++;
-
-    	// check for limit cases 
-    	if (p_struct.nc == n){
-    		f = 0; // always merge if all independent communities
-    	} else if (p_struct.nc == 1){
-    		f = 1; // always split if one big community
-    	} else {
-    		f = rand()/(RAND_MAX/3);
-    	}
-
-    	// choose proposal function
-		switch(f){
-		case 0: 
-			p_struct = merge_partition(p_struct);
-			break;
-		case 1:
-			p_struct = split_partition(p_struct);
-			break;
-		case 2:
-			p_struct = switch_partition(p_struct);
-			break;
-		}
-
-		// update annealing temperature
-		if (i % update_schedule == 0){
-			p_struct.T = T0 / (1 + log(1 + i));
-		}
-
-		// compare and update best log-evidence
-		if ((p_struct.current_log_evidence > p_struct.best_log_evidence) && !(DoubleSame(p_struct.current_log_evidence, p_struct.best_log_evidence))){
-			p_struct.best_log_evidence = p_struct.current_log_evidence;
-			p_struct.best_partition = p_struct.current_partition;
-			cout << "Best log-evidence: " << p_struct.current_log_evidence << "\t@T = " << p_struct.T << endl;
-			steps_since_improve = 0;
-		} else {
-			steps_since_improve++;
-		}
-
-		// stop if no improvement 
-		if (steps_since_improve > max_no_improve){
-			cout << "Maximum iterations without improvement reached." << endl;
-			break;
-		}
-
-    }
-
-    // performance 
-    auto end = chrono::system_clock::now();
-	chrono::duration<double> elapsed = end - start;
-	cout << "Iterations per second: " << static_cast <double> (iterations) / elapsed.count() << endl;
 
 	// print and save best partition
 	string cpath = "../output/comms/" + fname + "_comms.dat";

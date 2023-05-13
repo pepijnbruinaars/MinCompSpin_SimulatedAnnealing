@@ -5,7 +5,7 @@ Partition get_data(string fname, Partition &p_struct) {
 	// https://github.com/clelidm/MinCompSpin_Greedy
 
 	__uint128_t state;
-	string fpath = "../input/data/" + fname + ".dat";
+	string fpath = fname;
 	string line, subline;
 	ifstream myfile(fpath);
 

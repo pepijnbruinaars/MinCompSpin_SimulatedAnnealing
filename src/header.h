@@ -64,6 +64,11 @@ Partition merge_partition(Partition &p_struct);
 Partition split_partition(Partition &p_struct);
 Partition switch_partition(Partition &p_struct);
 
+// main algorithms
+Partition simulated_annealing(Partition &p_struct, 
+	unsigned int max_iterations, 
+	unsigned int max_no_improve);
+
 
 
 
