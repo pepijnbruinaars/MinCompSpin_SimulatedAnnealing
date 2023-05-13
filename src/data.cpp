@@ -5,7 +5,7 @@ Partition get_data(string fname, Partition &p_struct) {
 	// https://github.com/clelidm/MinCompSpin_Greedy
 
 	__uint128_t state;
-	string fpath = fname;
+	string fpath = "../input/data/" + fname + ".dat";
 	string line, subline;
 	ifstream myfile(fpath);
 
@@ -20,8 +20,8 @@ Partition get_data(string fname, Partition &p_struct) {
 
 	myfile.close();
 
-	cout << "loaded: " << fpath << endl;
-	cout << p_struct.N << " samples" << endl;
+	cout << "- loaded: " << fpath;
+	cout << " (" << p_struct.N << " samples)\n" << endl;
 
 	return p_struct;
 

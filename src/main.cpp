@@ -2,18 +2,29 @@
 
 int main(int argc, char **argv) {
 
-	cout << "SIMULATED ANNEALING [STAND-ALONE VERSION, UNUSED_BITS]" << endl;
 
-	// initialize RNG
-	random_device randDevice;
+	cout << "SIMULATED ANNEALING [STAND-ALONE VERSION - v20230513]\n" << endl;
+
+
+	// ==== initialize RNG ====
+ 	random_device randDevice;
     srand(randDevice());
+    // ========================
 
+
+    // ==== declarations ======
     bool pload = false; // load partition
     string fname, pname;
+    // ========================
+
+
+    // ==== default values ====
     unsigned int max_iterations = 50000;
     unsigned int max_no_improve = 10000;
+    // ========================
 
-    // runtime arguments
+
+    // ==== parse runtime arguments ====
     unsigned int n;
     sscanf(argv[1], "%d", &n);
 
@@ -21,31 +32,38 @@ int main(int argc, char **argv) {
 
     	string arg = argv[i];
 
+    	// input data
     	if (arg == "-i") {
     		fname = argv[i+1];
     		i++;
-    		cout << "input file: " << fname << endl;
+    		cout << "- input file: " << fname << endl;
     	}
 
+    	// input partition
     	if (arg == "-p") {
     		pname = argv[i+1];
     		pload = true;
     		i++;
-    		cout << "input partition: " << pname << endl;
+    		cout << "- input partition: " << pname << endl;
     	}
 
+    	// maximum iterations
     	if (arg == "--max") {
     		max_iterations = stoi(argv[i+1]);
     		i++;
     	}
 
+    	// stopping iterations
     	if (arg == "--stop") {
     		max_no_improve = stoi(argv[i+1]);
     		i++;
     	}
     }
 
-    cout << "max iterations (stop): " << max_iterations << " (" << max_no_improve << ")" << endl;
+    cout << "- max iterations (stop): ";
+    cout << max_iterations;
+    cout << " (" << max_no_improve << ")\n" << endl;
+    // =================================
 
     // initialize partition and load data
     Partition p_struct(n);

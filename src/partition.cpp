@@ -43,8 +43,8 @@ Partition random_partition(Partition &p_struct) {
 	p_struct.best_log_evidence = p_struct.current_log_evidence;
 	p_struct.best_partition = p_struct.current_partition;
 
-	cout << "Generated " << p_struct.nc << " communities" << endl;
-	cout << "Initial log-evidence: " << p_struct.current_log_evidence << endl;
+	cout << "- generated " << p_struct.nc << " communities" << endl;
+	cout << "- initial log-evidence: " << p_struct.current_log_evidence << endl;
 
 	return p_struct;
 }
@@ -58,14 +58,15 @@ Partition independent_partition(Partition &p_struct) {
 		community = (ONE << i);
 		p_struct = parse_community(p_struct, community, i);
 
-		cout << "New community: " << int_to_bitstring(community, p_struct.n) << endl;
+		// cout << "New community: " << int_to_bitstring(community, p_struct.n) << endl;
 
 	}
 
 	p_struct.best_log_evidence = p_struct.current_log_evidence;
 	p_struct.best_partition = p_struct.current_partition;
 
-	cout << "Initial log-evidence: " << p_struct.current_log_evidence << endl;
+	cout << "- starting from independent partition" << endl;
+	cout << "- initial log-evidence: " << p_struct.current_log_evidence << "\n" << endl;
 
 	return p_struct;
 }
@@ -90,8 +91,8 @@ Partition load_partition(Partition &p_struct, string pname) {
 	p_struct.best_log_evidence = p_struct.current_log_evidence;
 	p_struct.best_partition = p_struct.current_partition;
 	
-	cout << "Loaded " << p_struct.nc << " communities" << endl;
-	cout << "Initial log-evidence: " << p_struct.current_log_evidence << endl;
+	cout << "- loaded " << p_struct.nc << " communities" << endl;
+	cout << "- initial log-evidence: " << p_struct.current_log_evidence << "\n" << endl;
 
 	return p_struct;
 }
