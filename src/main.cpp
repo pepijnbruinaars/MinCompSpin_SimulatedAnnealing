@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
 
     // ==== declarations ======
     bool pload = false; // load partition
+    bool rload = false;
     string fname, pname;
     // ========================
 
@@ -47,6 +48,10 @@ int main(int argc, char **argv) {
     		cout << "- input partition: " << pname << endl;
     	}
 
+    	if (arg == "-r") {
+    		rload = true;
+    	}
+
     	// maximum iterations
     	if (arg == "--max") {
     		max_iterations = stoi(argv[i+1]);
@@ -71,8 +76,9 @@ int main(int argc, char **argv) {
 
     if (pload) {
     	p_struct = load_partition(p_struct, pname);
+    } else if (rload) {
+    	p_struct = random_partition(p_struct);
     } else {
-    	// p_struct = random_partition(p_struct);
     	p_struct = independent_partition(p_struct);
     }
 

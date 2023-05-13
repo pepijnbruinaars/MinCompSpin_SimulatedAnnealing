@@ -17,6 +17,8 @@ Partition parse_community(Partition &p_struct, __uint128_t community, int i){
 
 Partition random_partition(Partition &p_struct) {
 
+	cout << "- starting from random partition" << endl;
+
 	__uint128_t community;
 	__uint128_t assigned = 0;
 
@@ -32,9 +34,9 @@ Partition random_partition(Partition &p_struct) {
 
 			p_struct = parse_community(p_struct, community, i);
 
-			cout << "New community: " << int_to_bitstring(community, p_struct.n) << endl;
-			cout << "Log-evidence: " << p_struct.partition_evidence[i] << endl;
-			cout << "Assigned nodes: " << int_to_bitstring(assigned, p_struct.n) << endl;
+			cout << "- generated community: " << int_to_bitstring(community, p_struct.n) << endl;
+			cout << "- log-evidence: " << p_struct.partition_evidence[i] << endl;
+			//cout << "Assigned nodes: " << int_to_bitstring(assigned, p_struct.n) << endl;
 			cout << endl;
 			i++;
 		}
@@ -44,7 +46,7 @@ Partition random_partition(Partition &p_struct) {
 	p_struct.best_partition = p_struct.current_partition;
 
 	cout << "- generated " << p_struct.nc << " communities" << endl;
-	cout << "- initial log-evidence: " << p_struct.current_log_evidence << endl;
+	cout << "- initial log-evidence: " << p_struct.current_log_evidence << "\n" << endl;
 
 	return p_struct;
 }

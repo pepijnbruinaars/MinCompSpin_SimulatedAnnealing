@@ -63,7 +63,7 @@ Partition simulated_annealing(Partition &p_struct,
 
 		// stop if no improvement 
 		if (steps_since_improve > max_no_improve){
-			cout << "\n- maximum iterations without improvement reached." << endl;
+			cout << "\n- maximum iterations without improvement reached" << endl;
 			break;
 		}
 
@@ -72,7 +72,7 @@ Partition simulated_annealing(Partition &p_struct,
     // performance 
     auto end = chrono::system_clock::now();
 	chrono::duration<double> elapsed = end - start;
-	cout << "- iterations per second: " << static_cast <double> (iterations) / elapsed.count() << endl;
+	cout << "- iterations per second: " << static_cast <double> (iterations) / elapsed.count() << "\n" << endl;
 
 	return p_struct;
 }
