@@ -89,18 +89,26 @@ int main(int argc, char **argv) {
     	independent_partition(p_struct);
     }
 
-    if (greedy) {
+	// performance
+    auto start = chrono::system_clock::now();
+
+
+    // main algorithm 
+    simulated_annealing(p_struct, max_iterations, max_no_improve);
+    
+	if (greedy) {
         greedy_merging(p_struct);
         cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
         cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
     }
 
-    // main algorithm 
-    simulated_annealing(p_struct, max_iterations, max_no_improve);
-
     cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
     cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << endl;
 
+	// performance
+	auto end = chrono::system_clock::now();
+	chrono::duration<double> elapsed_seconds = end-start;
+	cout << "\n- elapsed time: " << elapsed_seconds.count() << "s\n" << endl;
 
 	// print and save best partition
 	string cpath = "../output/comms/" + fname + "_comms.dat";
@@ -108,6 +116,7 @@ int main(int argc, char **argv) {
 	ofstream comm_file(cpath);
 	ofstream stat_file(spath);
 	stat_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
+	stat_file << "elapsed time: " << elapsed_seconds.count() << "s" << endl;
     cout << "final log-evidence: " << p_struct.best_log_evidence << endl;
     cout << "final community: " << endl;
 	for(unsigned int i = 0; i < n; i++){
