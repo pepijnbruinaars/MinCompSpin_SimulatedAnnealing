@@ -1,3 +1,3 @@
 cd bin 
-saa.exe 20 -i my_data_n20_N1000 -g --max 50
+saa.exe 125 -i train-images-labeled-2 -g
 pause

@@ -1,6 +1,6 @@
 #include "header.h"
 
-Partition greedy_merging(Partition &p_struct) {
+void greedy_merging(Partition &p_struct) {
 
 	cout << "- running greedy merging algorithm on " << p_struct.nc << " communities\n" << endl; 
 
@@ -63,7 +63,6 @@ Partition greedy_merging(Partition &p_struct) {
 			last_i = best_i;
 			depth++;
 
-
 			p_struct.current_partition[best_i] = best_community;
 			p_struct.current_partition[best_j] = 0;
 			p_struct.best_partition[best_i] = best_community;
@@ -89,5 +88,5 @@ Partition greedy_merging(Partition &p_struct) {
 
 	
 
-	return p_struct;
+	// return p_struct;
 }

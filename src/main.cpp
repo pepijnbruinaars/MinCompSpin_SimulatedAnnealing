@@ -88,18 +88,16 @@ int main(int argc, char **argv) {
     } else {
     	p_struct = independent_partition(p_struct);
     }
-
-
-
-    if (greedy) {
-        p_struct = greedy_merging(p_struct);
-    }
     
     // main algorithm 
-    p_struct = simulated_annealing(p_struct, max_iterations, max_no_improve);
+    simulated_annealing(p_struct, max_iterations, max_no_improve);
 
+    cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
+    cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << endl;
 
-
+    if (greedy) {
+        greedy_merging(p_struct);
+    }
 
 	// print and save best partition
 	string cpath = "../output/comms/" + fname + "_comms.dat";
