@@ -1,6 +1,6 @@
 #include "header.h"
 
-Partition get_data(string fname, Partition &p_struct) {
+void get_data(string fname, Partition &p_struct) {
 
 	// https://github.com/clelidm/MinCompSpin_Greedy
 
@@ -22,8 +22,5 @@ Partition get_data(string fname, Partition &p_struct) {
 
 	cout << "- loaded: " << fpath;
 	cout << " (" << p_struct.N << " samples)\n" << endl;
-
-	return p_struct;
-
 
 }

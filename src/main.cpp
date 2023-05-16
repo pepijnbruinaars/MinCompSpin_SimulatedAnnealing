@@ -79,25 +79,28 @@ int main(int argc, char **argv) {
 
     // initialize partition and load data
     Partition p_struct(n);
-    p_struct = get_data(fname, p_struct);
+    get_data(fname, p_struct);
 
     if (pload) {
-    	p_struct = load_partition(p_struct, pname);
+    	load_partition(p_struct, pname);
     } else if (rload) {
-    	p_struct = random_partition(p_struct);
+    	random_partition(p_struct);
     } else {
-    	p_struct = independent_partition(p_struct);
+    	independent_partition(p_struct);
     }
-    
+
+    if (greedy) {
+        greedy_merging(p_struct);
+        cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
+        cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
+    }
+
     // main algorithm 
     simulated_annealing(p_struct, max_iterations, max_no_improve);
 
     cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
     cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << endl;
 
-    if (greedy) {
-        greedy_merging(p_struct);
-    }
 
 	// print and save best partition
 	string cpath = "../output/comms/" + fname + "_comms.dat";

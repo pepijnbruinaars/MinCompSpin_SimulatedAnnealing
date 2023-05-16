@@ -24,8 +24,6 @@ void simulated_annealing(Partition &p_struct,
 
     for (unsigned int i = 0; i < max_iterations; i++){
 
-
-
     	iterations++;
 
     	// check for limit cases 
@@ -40,13 +38,13 @@ void simulated_annealing(Partition &p_struct,
     	// choose proposal function
 		switch(f){
 		case 0: 
-			p_struct = merge_partition(p_struct);
+			merge_partition(p_struct);
 			break;
 		case 1:
-			p_struct = split_partition(p_struct);
+			split_partition(p_struct);
 			break;
 		case 2:
-			p_struct = switch_partition(p_struct);
+			switch_partition(p_struct);
 			break;
 		}
 
@@ -85,5 +83,4 @@ void simulated_annealing(Partition &p_struct,
 	p_struct.current_log_evidence = p_struct.best_log_evidence;
 	p_struct.current_partition = p_struct.best_partition;
 
-	// return p_struct;
 }

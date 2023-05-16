@@ -30,15 +30,11 @@ void greedy_merging(Partition &p_struct) {
 					double merged_evidence = icc_evidence(cij, p_struct);
 					delta_evidence = merged_evidence - unmerged_evidence;
 					__uint128_t identifier = (ONE << i) + (ONE << j);
-					calculated_evidence[identifier] = delta_evidence;	
-					//cout << "calculating: (" << i << "," << j << "): " << delta_evidence << endl; 			
+					calculated_evidence[identifier] = delta_evidence;			
 				} else {
 					__uint128_t identifier = (ONE << i) + (ONE << j);
 					delta_evidence = calculated_evidence[identifier];
-					//cout << "already calculated: (" << i << "," << j << "): " << delta_evidence << endl; 
 				}
-
-				//cout << i << " " << j << " : " << delta_evidence << endl;
 
 				if (delta_evidence > best_delta) {
 					best_delta = delta_evidence;
@@ -86,7 +82,4 @@ void greedy_merging(Partition &p_struct) {
 		}		
 	}
 
-	
-
-	// return p_struct;
 }

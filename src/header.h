@@ -53,16 +53,16 @@ map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data,
 double icc_evidence(__uint128_t community, Partition &p_struct);
 
 // partitions and data
-Partition get_data(string fname, Partition &p_struct);
-Partition independent_partition(Partition &p_struct);
-Partition random_partition(Partition &p_struct);
-Partition load_partition(Partition &p_struct, string pname);
-Partition parse_community(Partition &p_struct, __uint128_t community, int i);
+void get_data(string fname, Partition &p_struct);
+void independent_partition(Partition &p_struct);
+void random_partition(Partition &p_struct);
+void load_partition(Partition &p_struct, string pname);
+void parse_community(Partition &p_struct, __uint128_t community, int i);
 
 // proposal functions
-Partition merge_partition(Partition &p_struct);
-Partition split_partition(Partition &p_struct);
-Partition switch_partition(Partition &p_struct);
+void merge_partition(Partition &p_struct);
+void split_partition(Partition &p_struct);
+void switch_partition(Partition &p_struct);
 
 // main algorithms
 void simulated_annealing(Partition &p_struct, 

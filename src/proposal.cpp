@@ -1,8 +1,8 @@
 #include "header.h"
 
-Partition merge_partition(Partition &p_struct){
+void merge_partition(Partition &p_struct){
 
-	if (p_struct.nc <= 1){return p_struct;} // can't merge one community
+	if (p_struct.nc <= 1){return;} // can't merge one community
 
 	// choose two valid random communities
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions);
@@ -34,18 +34,16 @@ Partition merge_partition(Partition &p_struct){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p1);
 		}	
 
-
 	}
 
-	return p_struct;
 }
 
 
 
-Partition split_partition(Partition &p_struct){
+void split_partition(Partition &p_struct){
 
-	if (p_struct.nc == p_struct.n){return p_struct;} // can't split independent communities
-	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // can't split communities of size 1
+	if (p_struct.nc == p_struct.n){return;} // can't split independent communities
+	if (p_struct.occupied_partitions_gt2_nodes == 0){return;} // can't split communities of size 1
 
 	// choose random valid community
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
@@ -88,18 +86,16 @@ Partition split_partition(Partition &p_struct){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p2);
 		}		
 
-
 	}
 
-	return p_struct;
 }
 
 
-Partition switch_partition(Partition &p_struct){
+void switch_partition(Partition &p_struct){
 
-	if (p_struct.nc <= 1){return p_struct;} // can't switch node to same community 
-	if (p_struct.nc == p_struct.n){return p_struct;} // switching independent nodes doesn't change anything
-	if (p_struct.occupied_partitions_gt2_nodes == 0){return p_struct;} // don't create empty partitions
+	if (p_struct.nc <= 1){return;} // can't switch node to same community 
+	if (p_struct.nc == p_struct.n){return;} // switching independent nodes doesn't change anything
+	if (p_struct.occupied_partitions_gt2_nodes == 0){return;} // don't create empty partitions
 
 	unsigned int p1 = randomBitIndex(p_struct.occupied_partitions_gt2_nodes);
 	unsigned int p2 = randomBitIndex(p_struct.occupied_partitions - (ONE << p1));
@@ -132,6 +128,5 @@ Partition switch_partition(Partition &p_struct){
 
 	}
 
-	return p_struct;
 }
 
