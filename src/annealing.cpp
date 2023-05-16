@@ -68,7 +68,6 @@ Partition simulated_annealing(Partition &p_struct,
 			cout << "\n- maximum iterations without improvement reached" << endl;
 			break;
 		}
-
     }
 
     // performance 

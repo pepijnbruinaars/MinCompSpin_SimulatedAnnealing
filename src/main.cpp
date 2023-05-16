@@ -49,10 +49,12 @@ int main(int argc, char **argv) {
     		cout << "- input partition: " << pname << endl;
     	}
 
+        // start from random partition
     	if (arg == "-r") {
     		rload = true;
     	}
 
+        // perform greedy merhing
     	if (arg == "-g") {
     		greedy = true;
     	}
@@ -87,12 +89,15 @@ int main(int argc, char **argv) {
     	p_struct = independent_partition(p_struct);
     }
 
+
+
     if (greedy) {
-    	p_struct = greedy_merging(p_struct);
+        p_struct = greedy_merging(p_struct);
     }
     
     // main algorithm 
     p_struct = simulated_annealing(p_struct, max_iterations, max_no_improve);
+
 
 
 
@@ -101,15 +106,16 @@ int main(int argc, char **argv) {
 	string spath = "../output/stats/" + fname + "_stats.dat";
 	ofstream comm_file(cpath);
 	ofstream stat_file(spath);
-	stat_file << "best log-evidence:" << p_struct.best_log_evidence << endl;
+	stat_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
+    cout << "final log-evidence: " << p_struct.best_log_evidence << endl;
+    cout << "final community: " << endl;
 	for(unsigned int i = 0; i < n; i++){
 		__uint128_t community = p_struct.best_partition[i];
 		if (bit_count(community) > 0){
-			cout << int_to_bitstring(community, n) << " " << bit_count(community) << endl;
+			cout << i << "\t" << int_to_bitstring(community, n) << " | size: " << bit_count(community) << endl;
 			comm_file << int_to_bitstring(community, n) << endl;
 		}
 	}   
-
 	comm_file.close(); 
 	stat_file.close(); 
 

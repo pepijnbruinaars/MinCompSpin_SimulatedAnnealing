@@ -2,7 +2,6 @@
 
 Partition greedy_merging(Partition &p_struct) {
 
-
 	cout << "- running greedy merging algorithm on " << p_struct.nc << " communities\n" << endl; 
 
 	double best_delta = 1;
@@ -39,8 +38,6 @@ Partition greedy_merging(Partition &p_struct) {
 					//cout << "already calculated: (" << i << "," << j << "): " << delta_evidence << endl; 
 				}
 
-
-
 				//cout << i << " " << j << " : " << delta_evidence << endl;
 
 				if (delta_evidence > best_delta) {
@@ -55,12 +52,13 @@ Partition greedy_merging(Partition &p_struct) {
 
 		}
 
-		
-
 		// perform merge
 		if (best_delta > 0) {
 
-			cout << "merging nodes: " << best_i << " and " << best_j << " | delta log-e: " << best_delta << endl;
+			cout << "merging communities: " << best_i << " and " << best_j << " | delta log-e: " << best_delta << endl;
+			cout << "c1:  " << int_to_bitstring(p_struct.current_partition[best_i], p_struct.n) << endl;
+			cout << "c2:  " << int_to_bitstring(p_struct.current_partition[best_j], p_struct.n) << endl;
+			cout << "c12: " << int_to_bitstring(best_community, p_struct.n) << endl;
 
 			last_i = best_i;
 			depth++;
@@ -68,10 +66,15 @@ Partition greedy_merging(Partition &p_struct) {
 
 			p_struct.current_partition[best_i] = best_community;
 			p_struct.current_partition[best_j] = 0;
+			p_struct.best_partition[best_i] = best_community;
+			p_struct.best_partition[best_j] = 0;	
 			p_struct.partition_evidence[best_i] = best_merge;
 			p_struct.partition_evidence[best_j] = 0;
 			p_struct.occupied_partitions -= (ONE << best_j);
 			p_struct.current_log_evidence += best_delta;
+			p_struct.best_log_evidence = p_struct.current_log_evidence;
+
+			cout << "best log-evidence: " << p_struct.best_log_evidence << "\n" << endl;
 			p_struct.nc -= 1;
 
 			// update communities of size >= 2 (for split & switch)
