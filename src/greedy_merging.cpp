@@ -1,6 +1,6 @@
 #include "header.h"
 
-void greedy_merging(Partition &p_struct) {
+void greedy_merging(Partition &p_struct, string spath) {
 
 	cout << "- running greedy merging algorithm on " << p_struct.nc << " communities\n" << endl; 
 
@@ -9,12 +9,19 @@ void greedy_merging(Partition &p_struct) {
 	unsigned int depth = 0;
 	double delta_evidence;
 
+	auto start = chrono::system_clock::now();
+	int n_merges = 0;
+	int n_accepted_merges = 0;
+	int iterations = 0;
+
 	while (best_delta > 0) {
 
 		best_delta = 0;
 		double best_merge = 0;
 		unsigned int best_i, best_j, last_i;
 		__uint128_t best_community;
+
+		iterations++;
 
 		for (unsigned int i = 0; i < p_struct.n; i++){
 			for (unsigned int j = i + 1; j < p_struct.n; j++){
@@ -58,6 +65,7 @@ void greedy_merging(Partition &p_struct) {
 
 			last_i = best_i;
 			depth++;
+			n_accepted_merges++;
 
 			p_struct.current_partition[best_i] = best_community;
 			p_struct.current_partition[best_j] = 0;
@@ -81,5 +89,18 @@ void greedy_merging(Partition &p_struct) {
 			}	
 		}		
 	}
+
+	auto end = chrono::system_clock::now();
+	chrono::duration<double> elapsed_seconds = end - start;
+	ofstream stats_file;
+	stats_file.open(spath, ios_base::app);
+	stats_file << "-----Greedy Merging-----" << endl;
+	stats_file << "iterations (Greedy): " << iterations << endl;
+	stats_file << "iterations per second (Greedy): " << static_cast <double> (iterations) / elapsed_seconds.count() << endl;
+	stats_file << "runtime (Greedy): " << elapsed_seconds.count() << "s" << endl;
+	stats_file << "best log-evidence (after greedy): " << p_struct.best_log_evidence << endl;
+	stats_file << "attempted merges: " << n_merges << endl;
+	stats_file << "accepted merges: " << n_accepted_merges << endl;
+	stats_file.close();
 
 }

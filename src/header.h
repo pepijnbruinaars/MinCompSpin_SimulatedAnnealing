@@ -67,8 +67,9 @@ void switch_partition(Partition &p_struct);
 // main algorithms
 void simulated_annealing(Partition &p_struct, 
 	unsigned int max_iterations, 
-	unsigned int max_no_improve);
-void greedy_merging(Partition &p_struct);
+	unsigned int max_no_improve,
+	string spath);
+void greedy_merging(Partition &p_struct, string spath);
 
 
 

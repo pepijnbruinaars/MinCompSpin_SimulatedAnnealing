@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     bool pload = false; // load partition
     bool rload = false;
     bool greedy = false;
-    string fname, pname;
+    string fname, pname, cpath, spath;
     // ========================
 
 
@@ -37,6 +37,8 @@ int main(int argc, char **argv) {
     	// input data
     	if (arg == "-i") {
     		fname = argv[i+1];
+			cpath = "./output/comms/" + fname + "_comms.dat";
+			spath = "./output/stats/" + fname + "_stats.dat";
     		i++;
     		cout << "- input file: " << fname << endl;
     	}
@@ -80,7 +82,8 @@ int main(int argc, char **argv) {
     // initialize partition and load data
     Partition p_struct(n);
     get_data(fname, p_struct);
-
+	int n_unique_samples = p_struct.data.size();
+	double entropy = log2((double) n_unique_samples);
     if (pload) {
     	load_partition(p_struct, pname);
     } else if (rload) {
@@ -91,13 +94,18 @@ int main(int argc, char **argv) {
 
 	// performance
     auto start = chrono::system_clock::now();
-
+	auto stats_file = ofstream(spath);
+	// If the file exists, delete it
+	if (stats_file) {
+		stats_file.close();
+		remove(spath.c_str());
+	}
 
     // main algorithm 
-    simulated_annealing(p_struct, max_iterations, max_no_improve);
+    simulated_annealing(p_struct, max_iterations, max_no_improve, spath);
     
 	if (greedy) {
-        greedy_merging(p_struct);
+        greedy_merging(p_struct, spath);
         cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
         cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
     }
@@ -111,12 +119,13 @@ int main(int argc, char **argv) {
 	cout << "\n- elapsed time: " << elapsed_seconds.count() << "s\n" << endl;
 
 	// print and save best partition
-	string cpath = "../output/comms/" + fname + "_comms.dat";
-	string spath = "../output/stats/" + fname + "_stats.dat";
 	ofstream comm_file(cpath);
-	ofstream stat_file(spath);
-	stat_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
-	stat_file << "elapsed time: " << elapsed_seconds.count() << "s" << endl;
+	stats_file.open(spath, ios_base::app);
+	stats_file << "-----Final Results-----" << endl;
+	stats_file << "best log-evidence (Final): " << p_struct.best_log_evidence << endl;
+	stats_file << "elapsed time: " << elapsed_seconds.count() << "s" << endl;
+	stats_file << "unique samples: " << n_unique_samples << endl;
+	stats_file << "entropy: " << entropy << endl;
     cout << "final log-evidence: " << p_struct.best_log_evidence << endl;
     cout << "final community: " << endl;
 	for(unsigned int i = 0; i < n; i++){
@@ -127,7 +136,7 @@ int main(int argc, char **argv) {
 		}
 	}   
 	comm_file.close(); 
-	stat_file.close(); 
+	stats_file.close(); 
 
     return 0;
 

@@ -1,1 +1,24 @@
-best log-evidence: -222988
+-----Simulated annealing algorithm-----
+iterations: 84057
+iterations per second (SA): 5559.46
+runtime (SA): 15.1196s
+best log-evidence (after SA): -223338
+accepted partitions: 851
+attempted merges: 28239
+attempted splits: 27913
+attempted switches: 27905
+accepted merges: 213
+accepted splits: 373
+accepted switches: 265
+-----Greedy Merging-----
+iterations (Greedy): 1
+iterations per second (Greedy): 8.80987
+runtime (Greedy): 0.113509s
+best log-evidence (after greedy): -223338
+attempted merges: 0
+accepted merges: 0
+-----Final Results-----
+best log-evidence (Final): -223338
+elapsed time: 15.2338s
+unique samples: 5421
+entropy: 12.4043
