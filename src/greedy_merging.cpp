@@ -10,7 +10,6 @@ void greedy_merging(Partition &p_struct, string spath) {
 	double delta_evidence;
 
 	auto start = chrono::system_clock::now();
-	int n_merges = 0;
 	int n_accepted_merges = 0;
 	int iterations = 0;
 
@@ -95,11 +94,10 @@ void greedy_merging(Partition &p_struct, string spath) {
 	ofstream stats_file;
 	stats_file.open(spath, ios_base::app);
 	stats_file << "-----Greedy Merging-----" << endl;
-	stats_file << "iterations (Greedy): " << iterations << endl;
-	stats_file << "iterations per second (Greedy): " << static_cast <double> (iterations) / elapsed_seconds.count() << endl;
-	stats_file << "runtime (Greedy): " << elapsed_seconds.count() << "s" << endl;
-	stats_file << "best log-evidence (after greedy): " << p_struct.best_log_evidence << endl;
-	stats_file << "attempted merges: " << n_merges << endl;
+	stats_file << "iterations: " << iterations << endl;
+	stats_file << "iterations per second: " << static_cast <double> (iterations) / elapsed_seconds.count() << endl;
+	stats_file << "runtime: " << elapsed_seconds.count() << "s" << endl;
+	stats_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
 	stats_file << "accepted merges: " << n_accepted_merges << endl;
 	stats_file.close();
 

@@ -111,9 +111,9 @@ void simulated_annealing(Partition &p_struct,
 	stats_file.open(spath, ios_base::app);
 	stats_file << "-----Simulated annealing-----" << endl;
 	stats_file << "iterations: " << iterations << endl;
-	stats_file << "iterations per second (SA): " << static_cast <double> (iterations) / elapsed.count() << endl;
-	stats_file << "runtime (SA): " << elapsed.count() << "s" << endl;
-	stats_file << "best log-evidence (after SA): " << p_struct.best_log_evidence << endl;
+	stats_file << "iterations per second: " << static_cast <double> (iterations) / elapsed.count() << endl;
+	stats_file << "runtime: " << elapsed.count() << "s" << endl;
+	stats_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
 	stats_file << "accepted partitions: " << n_accepted_partitions << endl;
 	stats_file << "attempted merges: " << n_merges << endl;
 	stats_file << "attempted splits: " << n_splits << endl;
